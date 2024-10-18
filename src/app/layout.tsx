@@ -1,17 +1,20 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { PropsWithChildren, useEffect, useState } from "react"
 
 import "@/app/globals.css"
-import { Navigation } from "@/components/navigation"
+import { Navigation } from "@/app/components/ui/navigation"
 import { NetworkId } from "@/config"
 
-import { NearContext, Wallet } from "@/wallets/near"
+import { NearContext, Wallet } from "@/app/wallets/near"
 
-const wallet = new Wallet({ networkId: NetworkId })
+const wallet = new Wallet({
+  networkId: NetworkId,
+  createAccessKeyFor: "hello-near.testnet",
+})
 
 // Layout Component
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: PropsWithChildren) {
   const [signedAccountId, setSignedAccountId] = useState("")
 
   useEffect(() => {
